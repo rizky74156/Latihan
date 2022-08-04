@@ -54,7 +54,7 @@ func masuk(user, pass string)bool{
 
 func cekUser(user, pass string)bool{
 	for _, dataDaftar := range data{
-		if dataDaftar.username == user && dataDaftar.password == pass{
+		if dataDaftar.username == user {
 			return true
 		}
 	}
@@ -229,20 +229,6 @@ func pageTransfer(){
 	inputAngka("Saldo yang akan diransfer : "))
 }
 
-// func transfer(user string, saldo int){
-// 	for i := range data{
-// 		if data[i].username == akun.username{
-// 			cekTransfer(user,saldo)
-// 			data[i].username == user
-// 			data[i].balance += saldo
-// 		}else if data[i].username == akun.username{
-// 			fmt.Println("Tidak bisa transfer ke akun yang sama ")
-// 		}else{
-// 			fmt.Println("Tidak ada data")
-// 		}
-// 	}
-// }
-
 func transfer(user string, saldo int){
 	var biaya int = (saldo*3/100)
 	for i:= range data{
@@ -252,31 +238,26 @@ func transfer(user string, saldo int){
 				akun.balance = data[i].balance
 				fmt.Println("Transfer Berhasil, Dengan biaya admin sebesar : ",biaya )
 				break
-			}else {
-				fmt.Println("data tidak ditemukan")
-				break
 			}
+			break
 		}
 	}
 }
 
 func transferAkun1(user string, saldo int)bool{
-	for i := range data{
-		for data[i].username == akun.username{
-			if data[i].balance > saldo && saldo > 0{
-				return true
-			}else if data[i].balance == saldo{
-				fmt.Println("Saldo tidak mencukupi untuk biaya admin")
-				
-			}else if data[i].balance <= saldo{
-				fmt.Println("Saldo anda kurang")
-				
-			}else if saldo < 0{
-				fmt.Println("Tidak bisa memasukan angka negatif")
-				
-			}
-			break
-		}
+	if akun.balance > saldo && saldo > 0{
+		return true
+	}else if akun.balance == saldo{
+		fmt.Println("Saldo tidak mencukupi untuk biaya admin")
+		fmt.Println("Saldo anda : ",akun.balance)
+		pageTransfer()
+	}else if akun.balance <= saldo{
+		fmt.Println("Saldo anda kurang")				
+		fmt.Println("Saldo anda : ",akun.balance)
+		pageTransfer()
+	}else if saldo < 0{
+		fmt.Println("Tidak bisa memasukan angka negatif")	
+		pageTransfer()
 	}
 	return false
 }

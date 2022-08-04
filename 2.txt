@@ -1,0 +1,82 @@
+package main
+
+import (
+	"fmt"
+)
+
+type login struct{
+	user string
+	pass string
+}
+
+var data []login = []login{
+	{user : "rizky" , pass : "123"},
+	{user : "", pass:""},
+}
+
+func daftar(){
+	prosesDaftar(inputDaftar())
+}
+
+func prosesDaftar(user, pass string){
+	var newUser login
+
+	newUser.user = user
+	newUser.pass = pass
+	data = append(data, newUser)
+	
+	fmt.Println(data)
+}
+
+func inputDaftar()(string,string){
+	var user, pass string
+	var pilihan int
+
+	fmt.Println("==== Silakan Isi Pendaftaran =====")
+	fmt.Print("Masukan Username :")
+	fmt.Scan(&user)
+	fmt.Print("Masukan Password :")
+	fmt.Scan(&pass)
+	fmt.Print("Apakah anda sudah isi data dengan benar? [1 untuk benar, 0 untuk ulangai]:")
+	fmt.Scan(&pilihan)
+	if pilihan == 1{
+		return user,pass
+	}else if pilihan == 0{
+		prosesDaftar(inputDaftar())
+	}
+	return user,pass
+}
+
+func cekData(lo []login){
+	fmt.Println(data)
+}
+
+func menu(){
+	fmt.Println("Selamat Datang Di Aplikasi Menghitung")
+	fmt.Println("1. Login")
+	fmt.Println("2. Daftar")
+	fmt.Println("3. Keluar")
+	fmt.Println("4. Cek Data")
+}
+
+func main(){
+	var menuu int
+	var statuslooping bool = true
+
+	for statuslooping {
+	menu()
+	fmt.Print("Masukan Pilihan Anda : ")
+	fmt.Scan(&menuu)
+	if menuu == 1{
+		fmt.Println("Anda Memilih 1")
+	}else if menuu == 2{
+		fmt.Println("Anda Memilih 2")
+		daftar()
+	}else if menuu == 3{
+		fmt.Println("Terima Kasih")
+		break
+	}else if menuu == 4{
+		cekData(data)
+	}
+	}
+}
