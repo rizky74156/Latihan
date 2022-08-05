@@ -272,6 +272,9 @@ func transferAkun2(user string, saldo int)bool{
 			break
 		}
 	}
+	if akun.username != user{
+		fmt.Println("User tidak ditemukan")
+	}
 	return false
 }
 
